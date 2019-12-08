@@ -12,27 +12,12 @@ const APICallInstance = axios.create({
  * @returns {Promise} Promise from axios call
  */
 const requestHandler = (verb, url, data, headers) => {
-  switch (verb) {
-    case 'GET':
-      return APICallInstance.get(url, {
-        headers: {
-          ...headers,
-        },
-      });
-    case 'POST':
-      return APICallInstance.post(url, data, {
-        headers: {
-          ...headers,
-        },
-      });
-    case 'PATCH':
-      return APICallInstance.patch(url, data, {
-        headers: {
-          ...headers,
-        },
-      });
-    default: throw Error('Invalid HTTP verb');
+  if (typeof APICallInstance[verb.toLowerCase()] === 'function') {
+    return APICallInstance[verb.toLowerCase()](url, verb === 'GET' ? undefined : data, {
+      headers,
+    });
   }
+  throw Error('Invalid HTTP verb');
 };
 
 module.exports = {
