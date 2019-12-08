@@ -1,4 +1,5 @@
 const { requestHandler } = require('../networkService');
+const { httpStatusCodes } = require('../../constants');
 
 const proxyService = async (options, payload, successCallback) => {
   console.log(options);
@@ -7,7 +8,16 @@ const proxyService = async (options, payload, successCallback) => {
     successCallback(response);
   } catch (err) {
     console.log(err);
-    successCallback(err.response || { error: 'unknown' });
+    successCallback(err.response || {
+      headers: {
+        'x-proxy-status': 'miss from proxy',
+        'content-type': 'application/JSON',
+      },
+      status: httpStatusCodes.INTERNAL_SERVER_ERROR,
+      data: {
+        error: 'Unbale to reach destination server',
+      },
+    });
   }
 };
 

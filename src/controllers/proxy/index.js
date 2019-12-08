@@ -19,7 +19,10 @@ const proxyController = (req, res) => {
     if (!destination) {
       res.writeHeader(
         httpStatusCodes.BAD_REQUEST,
-        { 'x-proxy-status': 'miss from proxy' },
+        {
+          'x-proxy-status': 'miss from proxy',
+          'content-type': 'application/JSON',
+        },
       ).end(JSON.stringify({ error: 'Origin not registered' }));
       return;
     }
@@ -34,11 +37,8 @@ const proxyController = (req, res) => {
     proxyService(options, body, (response) => {
       res.writeHeader(
         response.status,
-        { ...response.headers, 'x-proxy-status': 'routed via proxy' },
+        { 'x-proxy-status': 'routed via proxy', ...response.headers },
       ).end(JSON.stringify(response.data));
-    }, (err) => {
-      console.log(err);
-      res.end(err);
     });
   });
 };
