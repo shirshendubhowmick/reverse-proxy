@@ -38,7 +38,7 @@ const proxyController = (req, res) => {
       res.writeHeader(
         response.status,
         { 'x-proxy-status': 'routed via proxy', ...response.headers },
-      ).end(JSON.stringify(response.data));
+      ).end(response.headers['content-type'].toLowerCase().startsWith('application/json') ? JSON.stringify(response.data) : response.data);
     });
   });
 };
