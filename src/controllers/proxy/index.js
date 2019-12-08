@@ -1,4 +1,7 @@
 const proxyService = require('../../services/proxyService');
+const cache = require('../../cache');
+const { httpStatusCodes } = require('../../constants');
+
 
 const porxyURLRegex = /^\/proxy(\/)?/;
 
@@ -11,9 +14,19 @@ const proxyController = (req, res) => {
   req.on('end', () => {
     body = Buffer.concat(body).toString();
     const { method, url, headers } = req;
+    const source = headers.host;
+    const destination = cache.get(`ORG_${source}`);
+    if (!destination) {
+      res.writeHeader(
+        httpStatusCodes.BAD_REQUEST,
+        { 'x-proxy-status': 'miss from proxy' },
+      ).end(JSON.stringify({ error: 'Origin not registered' }));
+      return;
+    }
+
     delete headers.host;
     const options = {
-      url: `http://api-local.zettaschool.com${url.replace(porxyURLRegex, '/')}`,
+      url: `${destination}${url.replace(porxyURLRegex, '/')}`,
       method,
       headers,
     };

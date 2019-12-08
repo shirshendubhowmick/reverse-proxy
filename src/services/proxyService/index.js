@@ -7,7 +7,7 @@ const proxyService = async (options, payload, successCallback) => {
     successCallback(response);
   } catch (err) {
     console.log(err);
-    successCallback(err.response);
+    successCallback(err.response || { error: 'unknown' });
   }
 };
 

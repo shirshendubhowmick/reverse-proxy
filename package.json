@@ -39,6 +39,7 @@
   },
   "homepage": "https://github.com/shirshendubhowmick/reverse-proxy#readme",
   "dependencies": {
-    "axios": "^0.19.0"
+    "axios": "^0.19.0",
+    "node-cache": "^5.1.0"
   }
 }
