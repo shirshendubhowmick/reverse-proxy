@@ -14,7 +14,7 @@ const proxyController = (req, res) => {
   req.on('end', () => {
     body = Buffer.concat(body).toString();
     const { method, url, headers } = req;
-    const source = headers.host;
+    const source = headers.origin;
     const destination = cache.get(`ORG_${source}`);
     if (!destination) {
       res.writeHeader(
