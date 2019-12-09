@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./main.css">
+  <title>Reverse proxy</title>
+</head>
+<body>
+  <div class="container">
+    <form id="input-form">
+      <div class="mb16">
+        <label for="origin" class="label">Origin address:</label>
+        <input type="text" name="origin" id="origin" class="text-input">
+      </div>
+      <div class="mb16">
+        <label for="origin" class="label">Destination address:</label>
+        <input type="text" name="destination" id="destination" class="text-input">
+      </div>
+      <button type="submit" class="submit-button">Submit</button>
+      <p id="message-para"></p>
+    </form>
+  </div>
+  <script src="./index.js"></script>
+</body>
+</html>
