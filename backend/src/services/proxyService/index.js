@@ -6,6 +6,7 @@ const proxyService = async (options, payload, successCallback) => {
     const response = await requestHandler(options.method, options.url, payload, options.headers);
     successCallback(response);
   } catch (err) {
+    console.log(err);
     successCallback(err.response || {
       headers: {
         'x-proxy-status': 'miss from proxy',
