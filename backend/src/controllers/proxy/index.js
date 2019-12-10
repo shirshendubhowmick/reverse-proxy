@@ -14,9 +14,8 @@ const proxyController = (req, res) => {
   req.on('end', () => {
     body = Buffer.concat(body).toString();
     const { method, url, headers } = req;
-    const source = headers.referer;
-	console.log(headers);
-    const destination = cache.get(`ORG`);
+    console.log(headers);
+    const destination = cache.get('ORG');
     if (!destination) {
       res.writeHeader(
         httpStatusCodes.BAD_REQUEST,
