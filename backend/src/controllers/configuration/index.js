@@ -12,7 +12,7 @@ const configController = (req, res) => {
     try {
       const configData = JSON.parse(body);
       const keys = Object.keys(configData);
-      cache.set(`ORG_${keys[0]}`, configData[keys[0]]);
+      cache.set(`ORG`, configData[keys[0]]);
       res.writeHeader(httpStatusCodes.NO_CONTENT, {
         'content-type': 'application/JSON',
         'Access-Control-Allow-Origin': '*',

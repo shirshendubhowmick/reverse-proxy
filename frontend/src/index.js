@@ -2,7 +2,7 @@
 
 var form = document.getElementById('input-form');
 var messagePara = document.getElementById('message-para');
-var API_URL = 'http://localhost:8085/config';
+var API_URL = 'http://35.203.155.52:8085/config';
 
 var xhttp = new XMLHttpRequest();
 
